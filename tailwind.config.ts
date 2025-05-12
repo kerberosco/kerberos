@@ -38,6 +38,11 @@ module.exports = {
       letterSpacing: {
         "tight-2": "-0.02em",
       },
+      lineHeight: {
+        "150": "1.5",
+        "140": "1.4",
+        "130": "1.3",
+      },
     },
   },
   plugins: [],

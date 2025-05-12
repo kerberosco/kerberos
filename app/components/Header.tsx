@@ -7,7 +7,7 @@ export default function Header() {
         <div className="relative">
           <Image
             src="/common/kerberos-logo.png"
-            alt="KERBEROS"
+            alt="KERBEROS logo"
             width={180}
             height={29}
             priority

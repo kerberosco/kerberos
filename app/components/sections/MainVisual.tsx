@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Button from "../Button";
 
-export default function HeroSection() {
+export default function MainVisual() {
   return (
     <section className="relative w-full h-[750px] max-h-[750px] overflow-hidden">
       <div className="relative w-full h-full max-w-[1920px] mx-auto">

@@ -43,6 +43,11 @@ module.exports = {
         "140": "1.4",
         "130": "1.3",
       },
+      borderRadius: {
+        "4": "4px",
+        "8": "8px",
+        "12": "12px",
+      },
     },
   },
   plugins: [],

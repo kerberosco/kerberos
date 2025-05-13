@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function Header() {
   return (
     <header className="w-full h-[90px]">
-      <div className="mx-auto max-w-desktop px-8 h-full flex items-center justify-between">
+      <div className="mx-auto max-w-desktop px-[30px] h-full flex items-center justify-between">
         <div className="relative">
           <Image
             src="/common/kerberos-logo.png"

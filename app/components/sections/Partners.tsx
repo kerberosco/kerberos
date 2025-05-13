@@ -1,4 +1,5 @@
 import Image from "next/image";
+import FadeInUp from "../animations/FadeInUp";
 
 const PARTNER_ITEMS = [
   {
@@ -57,31 +58,34 @@ export default function Partners() {
       className="w-full bg-black pb-[150px] tracking-tight-2"
       id="partners"
     >
-      <div className="w-full max-w-desktop mx-auto px-4 text-center md:text-left">
-        <h2 className="text-primary font-heading font-bold text-16 mb-[38px]">
-          Partners
-        </h2>
-        <h3 className="text-white text-36 font-bold leading-140 mb-[74px]">
-          켈베로스와 함께 성장하는
-          <br />
-          주요 파트너사를 소개합니다.
-        </h3>
+      <div className="w-full max-w-desktop mx-auto px-[30px] text-center md:text-left">
+        <FadeInUp>
+          <h2 className="text-primary font-heading font-bold text-16 mb-[38px]">
+            Partners
+          </h2>
+        </FadeInUp>
+        <FadeInUp delay={0.2}>
+          <h3 className="text-white text-36 font-bold leading-140 mb-[74px]">
+            켈베로스와 함께 성장하는
+            <br />
+            주요 파트너사를 소개합니다.
+          </h3>
+        </FadeInUp>
         <div className="flex justify-center">
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-[18px] gap-y-[16px] justify-items-center">
-            {PARTNER_ITEMS.map((partner) => (
-              <div
-                key={partner.name}
-                className="bg-white rounded-4 w-[180px] h-[100px] p-4 flex items-center justify-center"
-              >
-                <div className="relative w-full h-full">
-                  <Image
-                    src={partner.logo}
-                    alt={`${partner.name} 로고`}
-                    fill
-                    className="object-contain"
-                  />
+            {PARTNER_ITEMS.map((partner, index) => (
+              <FadeInUp key={partner.name} delay={0.3 + index * 0.1}>
+                <div className="bg-white rounded-4 w-[180px] h-[100px] p-4 flex items-center justify-center">
+                  <div className="relative w-full h-full">
+                    <Image
+                      src={partner.logo}
+                      alt={`${partner.name} 로고`}
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
                 </div>
-              </div>
+              </FadeInUp>
             ))}
           </div>
         </div>

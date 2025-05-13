@@ -29,7 +29,7 @@ export default function Portfolio() {
       id="portfolio"
     >
       <div className="mx-auto">
-        <div className="w-full max-w-desktop mx-auto px-4 mb-[74px]">
+        <div className="w-full max-w-desktop mx-auto px-[30px] mb-[74px]">
           <h2 className="text-primary font-heading font-bold text-16 mb-[38px] text-center">
             Portfolio
           </h2>

@@ -15,7 +15,7 @@ export default function Contact() {
         />
       </div>
       <div className="absolute inset-0 bg-black/70 font-bold tracking-tight-2" />
-      <div className="absolute inset-0 mx-auto max-w-desktop h-full flex items-center px-4">
+      <div className="absolute inset-0 mx-auto max-w-desktop h-full flex items-center px-[30px]">
         <div>
           <h2 className="text-primary font-heading font-bold text-16 mb-[38px]">
             Contact us

@@ -1,8 +1,19 @@
+"use client";
 import Image from "next/image";
 import Button from "../Button";
 import FadeInUp from "../animations/FadeInUp";
+import { useState } from "react";
 
 export default function MainVisual() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const scrollToSection = (sectionId: string) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+      setIsMenuOpen(false);
+    }
+  };
   return (
     <section className="relative w-full h-[600px] md:h-[750px] overflow-hidden mt-[70px] md:mt-0">
       <div className="relative w-full h-full max-w-[1920px] mx-auto">
@@ -36,7 +47,10 @@ export default function MainVisual() {
         </FadeInUp>
 
         <FadeInUp delay={0.6}>
-          <Button text="포트폴리오 보기" />
+          <Button
+            text="포트폴리오 보기"
+            onClick={() => scrollToSection("portfolio")}
+          />
         </FadeInUp>
       </div>
     </section>

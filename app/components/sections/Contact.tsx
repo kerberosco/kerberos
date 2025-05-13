@@ -4,7 +4,10 @@ import FadeInUp from "../animations/FadeInUp";
 
 export default function Contact() {
   return (
-    <section className="relative w-full h-[400px] sm:h-[500px] md:h-[564px] overflow-hidden">
+    <section
+      className="relative w-full h-[400px] sm:h-[500px] md:h-[564px] overflow-hidden"
+      id="contact"
+    >
       <div className="relative w-full h-full max-w-[1920px] mx-auto">
         <Image
           src="/common/banners/contact-banner.jpg"

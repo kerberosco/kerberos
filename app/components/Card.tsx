@@ -36,8 +36,7 @@ export function Card({
           "flex-col sm:flex-row",
           imagePosition === "left" && "sm:flex-row-reverse",
           className,
-        ],
-        imagePosition === "right" ? "sm:flex-row" : "sm:flex-row-reverse"
+        ]
       )}
     >
       <div
@@ -45,8 +44,8 @@ export function Card({
           "text-white flex flex-col tracking-tight-2",
           variant === "about" && "gap-[15px] sm:gap-[25px]",
           variant === "why" && [
-            imagePosition === "right" ? "order-2 sm:order-1" : "order-2",
             "flex-1",
+            imagePosition === "right" ? "order-2 sm:order-1" : "order-1",
           ]
         )}
       >
@@ -57,7 +56,9 @@ export function Card({
           "relative",
           imageSize,
           variant === "why" && [
-            imagePosition === "right" ? "order-1 sm:order-2" : "order-1",
+            imagePosition === "right"
+              ? "order-1 sm:order-2"
+              : "order-2 sm:order-1",
             "mx-auto sm:mx-0",
           ]
         )}
@@ -66,7 +67,7 @@ export function Card({
           src={imageSrc}
           alt={imageAlt}
           fill
-          className="object-cover"
+          className="object-cover rounded-12"
           sizes="(max-width: 420px) 100vw, 420px"
         />
       </div>
@@ -100,9 +101,13 @@ export function WhyCardContent({
 }) {
   return (
     <>
-      <h4 className="text-36 font-bold leading-130 mb-[19px]">{title}</h4>
-      <h5 className="text-24 font-normal leading-130">{subtitle}</h5>
-      <p className="text-18 font-normal leading-150 mt-[13px] whitespace-pre-wrap break-keep">
+      <h4 className="text-36 font-bold leading-130 mb-[19px] text-center sm:text-left">
+        {title}
+      </h4>
+      <h5 className="text-24 font-normal leading-130 text-center sm:text-left">
+        {subtitle}
+      </h5>
+      <p className="text-18 font-normal leading-150 mt-[13px] whitespace-pre-wrap break-keep text-center sm:text-left">
         {content}
       </p>
     </>

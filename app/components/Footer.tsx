@@ -15,15 +15,21 @@ export default function Footer() {
           />
         </div>
         <div className="flex flex-col md:flex-row md:items-center md:justify-between h-full tracking-tight-2 text-14 sm:text-15 md:text-16">
-          <div className="flex flex-col leading-150 md:leading-140 mb-6 md:mb-0">
-            <p>
+          <div className="flex flex-col leading-150 md:leading-140 mb-6 md:mb-0 gap-1 md:gap-0">
+            <p className="mb-0 md:mb-0">
               주식회사 켈베로스 <span className="mx-1">|</span> 대표이사: 유승
             </p>
-            <p>
-              대표번호: 031-340-3939 <span className="mx-1">|</span> 이메일:
-              corp.kerberos@gmail.com
-            </p>
-            <p>경기도 안양시 동안구 엘에스로 92</p>
+            <div className="flex md:hidden flex-col gap-1">
+              <p>대표번호: 031-340-3939</p>
+              <p>이메일: corp.kerberos@gmail.com</p>
+            </div>
+            <div className="hidden md:block">
+              <p>
+                대표번호: 031-340-3939 <span className="mx-1">|</span> 이메일:
+                corp.kerberos@gmail.com
+              </p>
+            </div>
+            <p className="mt-0 md:mt-0">경기도 안양시 동안구 엘에스로 92</p>
           </div>
 
           <p className="text-12 sm:text-14 md:text-16 text-white/50">

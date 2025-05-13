@@ -40,8 +40,8 @@ export default function WhyKerberos() {
               imageSrc="/sections/why-kerberos/brand-connection.png"
               imageAlt="브랜드 커넥션 이미지"
               imagePosition="left"
+              className="flex-col sm:flex-row"
             >
-              {/* 본질적인 뒤에 띄어쓰기 2개 있음 */}
               <WhyCardContent
                 title="BRAND CONNECTION"
                 subtitle="&ldquo;신뢰를 설계하는 기획, 관계를 만드는 현장&rdquo;"

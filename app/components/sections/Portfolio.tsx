@@ -11,7 +11,7 @@ export default function Portfolio() {
     loop: true,
     align: "center",
     skipSnaps: false,
-    dragFree: false,
+    dragFree: true,
     containScroll: "trimSnaps",
     slidesToScroll: 1,
   });
@@ -29,8 +29,8 @@ export default function Portfolio() {
       className="w-full bg-black py-[80px] md:py-[150px] tracking-tight-2"
       id="portfolio"
     >
-      <div className="mx-auto">
-        <div className="w-full max-w-desktop mx-auto px-5 sm:px-[30px] mb-[30px] sm:mb-[50px] md:mb-[74px]">
+      <div className="w-full">
+        <div className="w-full px-5 sm:px-[30px] mb-[30px] sm:mb-[50px] md:mb-[74px]">
           <FadeInUp>
             <h2 className="text-primary font-heading font-bold text-14 sm:text-16 mb-[20px] sm:mb-[30px] md:mb-[38px] text-center">
               Portfolio
@@ -89,14 +89,13 @@ export default function Portfolio() {
           </div>
         </div>
 
-        <div className="relative">
-          {/* Carousel Container */}
-          <div className="overflow-hidden" ref={emblaRef}>
-            <div className="flex gap-[10px] sm:gap-[20px] pl-5">
-              {PORTFOLIO_ITEMS.map((item) => (
-                <PortfolioCard key={item.id} {...item} />
-              ))}
-            </div>
+        <div className="relative w-full overflow-hidden" ref={emblaRef}>
+          <div className="flex">
+            {PORTFOLIO_ITEMS.map((item) => (
+              <div key={item.id} className="flex-none px-[5px] sm:px-[10px]">
+                <PortfolioCard {...item} />
+              </div>
+            ))}
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import AboutUs from "./components/sections/AboutUs";
 import MainVisual from "./components/sections/MainVisual";
 import WhyKerberos from "./components/sections/WhyKerberos";
+import Portfolio from "./components/sections/Portfolio";
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
       <MainVisual />
       <AboutUs />
       <WhyKerberos />
+      <Portfolio />
     </main>
   );
 }

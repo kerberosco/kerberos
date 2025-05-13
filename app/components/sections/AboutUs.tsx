@@ -2,7 +2,7 @@ import { Card, AboutCardContent } from "../Card";
 
 export default function AboutUs() {
   return (
-    <section className="w-full" id="about-us">
+    <section className="w-full py-[150px]" id="about-us">
       <div className="mx-auto max-w-desktop px-4">
         <h2 className="text-primary font-bold text-16 mb-[38px]">About us</h2>
         <div className="text-white text-36 font-bold mb-[74px] leading-140 tracking-tight-2">

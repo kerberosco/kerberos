@@ -2,7 +2,7 @@ import { Card, WhyCardContent } from "../Card";
 
 export default function WhyKerberos() {
   return (
-    <section className="w-full bg-black py-[150px]" id="why-kerberos">
+    <section className="w-full bg-black pb-[150px]" id="why-kerberos">
       <div className="mx-auto max-w-desktop px-4">
         <h2 className="text-primary font-heading tracking-tight-2 font-bold text-16 mb-[38px]">
           Why Kerberos?

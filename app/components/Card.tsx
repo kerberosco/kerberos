@@ -19,28 +19,38 @@ export function Card({
   className,
 }: CardProps) {
   const imageSize =
-    variant === "about" ? "w-[90px] h-[90px]" : "w-[580px] h-[320px]";
+    variant === "about"
+      ? "w-[90px] h-[90px]"
+      : "w-[280px] md:w-[340px] lg:w-[420px] h-auto aspect-[420/262] flex-shrink-0";
 
   return (
     <div
       className={clsx(
-        `flex items-center justify-between ${className}`,
+        `flex items-center bg-card w-full`,
         variant === "about" && "bg-card px-[60px] py-[55px] rounded-8",
-        variant === "why" && "gap-[100px]",
+        variant === "why" && [
+          "gap-[74px] px-[60px] py-[52px] rounded-12",
+          className,
+        ],
         imagePosition === "right" ? "flex-row" : "flex-row-reverse"
       )}
     >
       <div
         className={clsx(
-          "text-white flex flex-col tracking-tight-2",
-          variant === "about" && "gap-[25px]",
-          variant === "why" && "gap-[30px]"
+          "text-white flex flex-col tracking-tight-2 flex-1",
+          variant === "about" && "gap-[25px]"
         )}
       >
         {children}
       </div>
       <div className={clsx("relative", imageSize)}>
-        <Image src={imageSrc} alt={imageAlt} fill className="object-contain" />
+        <Image
+          src={imageSrc}
+          alt={imageAlt}
+          fill
+          className="object-cover"
+          sizes="(max-width: 420px) 100vw, 420px"
+        />
       </div>
     </div>
   );
@@ -72,9 +82,11 @@ export function WhyCardContent({
 }) {
   return (
     <>
-      <h4 className=" text-36 font-bold leading-130">{title}</h4>
-      <h5 className=" text-24 font-normal leading-130">{subtitle}</h5>
-      <p className="text-18 font-normal leading-150">{content}</p>
+      <h4 className="text-36 font-bold leading-130 mb-[19px]">{title}</h4>
+      <h5 className="text-24 font-normal leading-130">{subtitle}</h5>
+      <p className="text-18 font-normal leading-150 mt-[13px] whitespace-pre-wrap break-keep">
+        {content}
+      </p>
     </>
   );
 }

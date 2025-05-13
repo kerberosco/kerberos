@@ -3,7 +3,7 @@ import MainVisual from "./components/sections/MainVisual";
 import WhyKerberos from "./components/sections/WhyKerberos";
 import Portfolio from "./components/sections/Portfolio";
 import Partners from "./components/sections/Partners";
-
+import Contact from "./components/sections/Contact";
 export default function Home() {
   return (
     <main className="w-full">
@@ -12,6 +12,7 @@ export default function Home() {
       <WhyKerberos />
       <Portfolio />
       <Partners />
+      <Contact />
     </main>
   );
 }

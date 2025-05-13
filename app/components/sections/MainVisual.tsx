@@ -3,7 +3,7 @@ import Button from "../Button";
 
 export default function MainVisual() {
   return (
-    <section className="relative w-full h-[750px] max-h-[750px] overflow-hidden">
+    <section className="relative w-full h-[750px] overflow-hidden">
       <div className="relative w-full h-full max-w-[1920px] mx-auto">
         <Image
           src="/common/banners/slogan-challenge-banner.jpg"

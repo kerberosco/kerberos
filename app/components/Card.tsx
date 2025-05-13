@@ -27,23 +27,41 @@ export function Card({
     <div
       className={clsx(
         `flex items-center bg-card w-full`,
-        variant === "about" && "bg-card px-[60px] py-[55px] rounded-8",
+        variant === "about" && [
+          "bg-card px-[20px] sm:px-[60px] py-[30px] sm:py-[55px] rounded-8",
+          "justify-between",
+        ],
         variant === "why" && [
-          "gap-[74px] px-[60px] py-[52px] rounded-12",
+          "gap-[30px] sm:gap-[74px] px-[20px] sm:px-[60px] py-[30px] sm:py-[52px] rounded-12",
+          "flex-col sm:flex-row",
+          imagePosition === "left" && "sm:flex-row-reverse",
           className,
         ],
-        imagePosition === "right" ? "flex-row" : "flex-row-reverse"
+        imagePosition === "right" ? "sm:flex-row" : "sm:flex-row-reverse"
       )}
     >
       <div
         className={clsx(
-          "text-white flex flex-col tracking-tight-2 flex-1",
-          variant === "about" && "gap-[25px]"
+          "text-white flex flex-col tracking-tight-2",
+          variant === "about" && "gap-[15px] sm:gap-[25px]",
+          variant === "why" && [
+            imagePosition === "right" ? "order-2 sm:order-1" : "order-2",
+            "flex-1",
+          ]
         )}
       >
         {children}
       </div>
-      <div className={clsx("relative", imageSize)}>
+      <div
+        className={clsx(
+          "relative",
+          imageSize,
+          variant === "why" && [
+            imagePosition === "right" ? "order-1 sm:order-2" : "order-1",
+            "mx-auto sm:mx-0",
+          ]
+        )}
+      >
         <Image
           src={imageSrc}
           alt={imageAlt}

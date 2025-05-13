@@ -55,27 +55,27 @@ const PARTNER_ITEMS = [
 export default function Partners() {
   return (
     <section
-      className="w-full bg-black pb-[150px] tracking-tight-2"
+      className="w-full bg-black pb-[80px] sm:pb-[100px] md:pb-[150px] tracking-tight-2"
       id="partners"
     >
-      <div className="w-full max-w-desktop mx-auto px-[30px] text-center md:text-left">
+      <div className="w-full max-w-desktop mx-auto px-5 sm:px-[30px] text-center md:text-left">
         <FadeInUp>
-          <h2 className="text-primary font-heading font-bold text-16 mb-[38px]">
+          <h2 className="text-primary font-heading font-bold text-14 sm:text-16 mb-[20px] sm:mb-[30px] md:mb-[38px]">
             Partners
           </h2>
         </FadeInUp>
         <FadeInUp delay={0.2}>
-          <h3 className="text-white text-36 font-bold leading-140 mb-[74px]">
+          <h3 className="text-white text-24 sm:text-28 md:text-36 font-bold leading-140 mb-[40px] sm:mb-[60px] md:mb-[74px]">
             켈베로스와 함께 성장하는
             <br />
             주요 파트너사를 소개합니다.
           </h3>
         </FadeInUp>
         <div className="flex justify-center">
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-[18px] gap-y-[16px] justify-items-center">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-[10px] sm:gap-x-[18px] gap-y-[10px] sm:gap-y-[16px] justify-items-center">
             {PARTNER_ITEMS.map((partner, index) => (
               <FadeInUp key={partner.name} delay={0.3 + index * 0.1}>
-                <div className="bg-white rounded-4 w-[180px] h-[100px] p-4 flex items-center justify-center">
+                <div className="bg-white rounded-4 w-[140px] sm:w-[160px] md:w-[180px] h-[80px] sm:h-[90px] md:h-[100px] p-3 sm:p-4 flex items-center justify-center">
                   <div className="relative w-full h-full">
                     <Image
                       src={partner.logo}

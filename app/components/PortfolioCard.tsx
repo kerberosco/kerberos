@@ -18,8 +18,8 @@ export default function PortfolioCard({
   imageAlt,
 }: PortfolioCardProps) {
   return (
-    <div className="flex-[0_0_480px] min-w-0">
-      <div className="relative w-[480px] h-[360px] mb-[30px]">
+    <div className="flex-[0_0_280px] sm:flex-[0_0_380px] md:flex-[0_0_480px] min-w-0">
+      <div className="relative w-[280px] sm:w-[380px] md:w-[480px] h-[210px] sm:h-[285px] md:h-[360px] mb-[20px] sm:mb-[30px]">
         <Image
           src={imageSrc}
           alt={imageAlt}
@@ -28,15 +28,18 @@ export default function PortfolioCard({
         />
       </div>
       <div className="flex flex-col font-bold tracking-tight-2">
-        <div className="flex items-center justify-between">
-          <h4 className="text-white text-24 pb-[14px]">{title}</h4>
-          <span className="text-white/80 text-14 px-4 py-[10px] bg-portfolio-dark rounded-[60px]">
+        <div className="flex items-center justify-between mb-[10px] sm:mb-[14px]">
+          <h4 className="text-white text-18 sm:text-20 md:text-24">{title}</h4>
+          <span className="text-white/80 text-12 sm:text-14 px-3 sm:px-4 py-[8px] sm:py-[10px] bg-portfolio-dark rounded-[60px]">
             {partner}
           </span>
         </div>
-
-        <p className="text-white/90 text-18 font-normal">{subtitle}</p>
-        <span className="text-white/80 text-16 pt-[30px]">{createdAt}</span>
+        <p className="text-white/90 text-14 sm:text-16 md:text-18 font-normal">
+          {subtitle}
+        </p>
+        <span className="text-white/80 text-14 sm:text-16 pt-[20px] sm:pt-[30px]">
+          {createdAt}
+        </span>
       </div>
     </div>
   );

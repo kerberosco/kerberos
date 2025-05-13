@@ -3,13 +3,18 @@ import FadeInUp from "../animations/FadeInUp";
 
 export default function AboutUs() {
   return (
-    <section className="w-full py-[150px]" id="about-us">
-      <div className="mx-auto max-w-desktop px-[30px]">
+    <section
+      className="w-full py-[40px] sm:py-[60px] md:py-[150px]"
+      id="about-us"
+    >
+      <div className="mx-auto max-w-desktop px-5 sm:px-[30px]">
         <FadeInUp>
-          <h2 className="text-primary font-bold text-16 mb-[38px]">About us</h2>
+          <h2 className="text-primary font-bold text-14 sm:text-16 mb-[20px] sm:mb-[30px] md:mb-[38px]">
+            About us
+          </h2>
         </FadeInUp>
         <FadeInUp delay={0.2}>
-          <div className="text-white text-36 font-bold mb-[74px] leading-140 tracking-tight-2">
+          <div className="text-white text-24 sm:text-32 md:text-36 font-bold mb-[30px] sm:mb-[50px] md:mb-[74px] leading-140 tracking-tight-2">
             <h1>
               오프라인 브랜딩의 모든 것,
               <br />
@@ -18,7 +23,7 @@ export default function AboutUs() {
           </div>
         </FadeInUp>
 
-        <div className="grid grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-5">
           <FadeInUp delay={0.4}>
             <Card
               variant="about"

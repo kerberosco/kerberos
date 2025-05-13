@@ -3,15 +3,18 @@ import FadeInUp from "../animations/FadeInUp";
 
 export default function WhyKerberos() {
   return (
-    <section className="w-full bg-black pb-[150px]" id="why-kerberos">
-      <div className="mx-auto max-w-desktop px-[30px]">
+    <section
+      className="w-full bg-black py-[80px] md:py-[150px]"
+      id="why-kerberos"
+    >
+      <div className="mx-auto max-w-desktop px-5 sm:px-[30px]">
         <FadeInUp>
-          <h2 className="text-primary font-heading tracking-tight-2 font-bold text-16 mb-[38px]">
+          <h2 className="text-primary font-heading tracking-tight-2 font-bold text-14 sm:text-16 mb-[30px] sm:mb-[38px]">
             Why Kerberos?
           </h2>
         </FadeInUp>
 
-        <div className="flex flex-col gap-[80px]">
+        <div className="flex flex-col gap-[40px] sm:gap-[60px] md:gap-[80px]">
           {/* Offline Event */}
           <FadeInUp delay={0.2}>
             <Card

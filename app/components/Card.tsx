@@ -84,8 +84,12 @@ export function AboutCardContent({
 }) {
   return (
     <>
-      <h4 className="text-white text-24 font-bold">{title}</h4>
-      <p className="text-white/90 text-18 font-normal">{description}</p>
+      <h4 className="text-white text-lg sm:text-xl md:text-2xl font-bold">
+        {title}
+      </h4>
+      <p className="text-white/80 text-base sm:text-lg md:text-xl font-normal">
+        {description}
+      </p>
     </>
   );
 }
@@ -101,13 +105,13 @@ export function WhyCardContent({
 }) {
   return (
     <>
-      <h4 className="text-36 font-bold leading-130 mb-[19px] text-center sm:text-left">
+      <h4 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-130 mb-[19px] text-center sm:text-left">
         {title}
       </h4>
-      <h5 className="text-24 font-normal leading-130 text-center sm:text-left">
+      <h5 className="text-16 sm:text-xl md:text-2xl font-normal leading-130 text-center sm:text-left text-white/90">
         {subtitle}
       </h5>
-      <p className="text-18 font-normal leading-150 mt-[13px] whitespace-pre-wrap break-keep text-center sm:text-left">
+      <p className="text-sm sm:text-lg md:text-xl font-normal leading-150 mt-[13px] whitespace-pre-wrap break-keep text-center sm:text-left text-white/60">
         {content}
       </p>
     </>

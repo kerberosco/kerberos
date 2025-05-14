@@ -30,7 +30,7 @@ export default function PortfolioCard({
       <div className="flex flex-col font-bold tracking-tight-2">
         <div className="flex items-center justify-between mb-[10px] sm:mb-[14px]">
           <h4 className="text-white text-18 sm:text-20 md:text-24">{title}</h4>
-          <span className="text-white/80 text-12 sm:text-14 px-3 sm:px-4 py-[8px] sm:py-[10px] bg-portfolio-dark rounded-[60px]">
+          <span className="text-white/80 text-[10px] sm:text-[12px] px-3 sm:px-4 py-[8px] sm:py-[10px] bg-portfolio-dark rounded-[60px]">
             {partner}
           </span>
         </div>

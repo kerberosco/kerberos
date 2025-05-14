@@ -1,14 +1,20 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import Button from "../Button";
 import FadeInUp from "../animations/FadeInUp";
+import ContactForm from "../ContactForm";
 
 export default function Contact() {
+  const [showForm, setShowForm] = useState(false);
+
   return (
     <section
       className="relative w-full h-[400px] sm:h-[500px] md:h-[564px] overflow-hidden"
       id="contact"
     >
-      <div className="relative w-full h-full max-w-[1920px] mx-auto">
+      <div className="absolute inset-0 w-full h-full max-w-[1920px] mx-auto">
         <Image
           src="/common/banners/contact-banner.jpg"
           alt="켈베로스 문의하기 배너 이미지"
@@ -34,10 +40,39 @@ export default function Contact() {
             </h3>
           </FadeInUp>
           <FadeInUp delay={0.4}>
-            <Button text="문의하기" />
+            <Button text="문의하기" onClick={() => setShowForm(true)} />
           </FadeInUp>
         </div>
       </div>
+
+      {showForm && (
+        <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-5">
+          <div className="bg-black border border-white/10 rounded-xl p-8 w-full max-w-2xl max-h-[90vh] overflow-y-auto relative">
+            <button
+              onClick={() => setShowForm(false)}
+              className="absolute top-4 right-4 text-white/50 hover:text-white"
+              aria-label="닫기"
+            >
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M18 6L6 18M6 6L18 18"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+            <ContactForm />
+          </div>
+        </div>
+      )}
     </section>
   );
 }

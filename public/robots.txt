@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://kbrs.co.kr/sitemap.xml 

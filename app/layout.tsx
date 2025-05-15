@@ -15,7 +15,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Kerveros",
+  title: "Kerberos",
   description: "mice 기반 마케팅 기획사",
   icons: [
     {

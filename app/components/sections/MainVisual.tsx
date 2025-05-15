@@ -2,16 +2,12 @@
 import Image from "next/image";
 import Button from "../Button";
 import FadeInUp from "../animations/FadeInUp";
-import { useState } from "react";
 
 export default function MainVisual() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   const scrollToSection = (sectionId: string) => {
     const section = document.getElementById(sectionId);
     if (section) {
       section.scrollIntoView({ behavior: "smooth" });
-      setIsMenuOpen(false);
     }
   };
   return (
@@ -42,7 +38,10 @@ export default function MainVisual() {
               오프라인 팝업, 전시, 박람회를 중심으로 브랜드의 경험을 기획하고
               실행하는
             </p>
-            <p className="mt-2">MICE 기반 마케팅 그룹, (주)켈베로스입니다.</p>
+            <p className="mt-2">
+              MICE 기반 마케팅 그룹,{" "}
+              <span className="text-primary">(주)켈베로스</span> 입니다.
+            </p>
           </article>
         </FadeInUp>
 

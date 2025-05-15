@@ -5,6 +5,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import PortfolioCard from "../PortfolioCard";
 import { PORTFOLIO_ITEMS } from "@/app/constants/portfolio";
 import FadeInUp from "../animations/FadeInUp";
+import PortfolioModal from "../PortfolioModal";
 
 export default function Portfolio() {
   const [emblaRef, emblaApi] = useEmblaCarousel({
@@ -29,6 +30,7 @@ export default function Portfolio() {
       className="w-full bg-black py-[80px] md:py-[150px] tracking-tight-2"
       id="portfolio"
     >
+      <PortfolioModal />
       <div className="mx-auto max-w-desktop px-5 sm:px-[30px] mb-[30px] sm:mb-[50px] md:mb-[74px]">
         <FadeInUp>
           <h2 className="text-primary font-heading font-bold text-14 sm:text-16 mb-[20px] sm:mb-[30px] md:mb-[38px] text-center">

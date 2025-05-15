@@ -1,6 +1,12 @@
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
+import PrivacyPolicyModal from "./PrivacyPolicyModal";
 
 export default function Footer() {
+  const [isPrivacyPolicyOpen, setIsPrivacyPolicyOpen] = useState(false);
+
   return (
     <footer className="w-full text-footer-text py-[40px] sm:py-[50px] md:py-[60px] bg-black">
       <div className="mx-auto max-w-desktop flex flex-col gap-6 sm:gap-8 md:gap-10 px-5 sm:px-[30px]">
@@ -32,11 +38,24 @@ export default function Footer() {
             <p className="mt-0 md:mt-0">경기도 안양시 동안구 엘에스로 92</p>
           </div>
 
-          <p className="text-12 sm:text-14 md:text-16 text-white/50">
-            &copy; KERBEROS. All rights reserved.
-          </p>
+          <div className="flex flex-col items-end gap-2">
+            <button
+              onClick={() => setIsPrivacyPolicyOpen(true)}
+              className="text-white/60 hover:text-white transition-colors text-12 sm:text-14 md:text-16"
+            >
+              개인정보처리방침
+            </button>
+            <p className="text-12 sm:text-14 md:text-16 text-white/50">
+              &copy; KERBEROS. All rights reserved.
+            </p>
+          </div>
         </div>
       </div>
+
+      <PrivacyPolicyModal
+        isOpen={isPrivacyPolicyOpen}
+        onClose={() => setIsPrivacyPolicyOpen(false)}
+      />
     </footer>
   );
 }

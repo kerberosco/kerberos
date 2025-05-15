@@ -5,9 +5,12 @@ import Image from "next/image";
 import Button from "../Button";
 import FadeInUp from "../animations/FadeInUp";
 import ContactForm from "../ContactForm";
+import ModalAnimation from "../animations/ModalAnimation";
 
 export default function Contact() {
   const [showForm, setShowForm] = useState(false);
+
+  const handleClose = () => setShowForm(false);
 
   return (
     <section
@@ -45,34 +48,32 @@ export default function Contact() {
         </div>
       </div>
 
-      {showForm && (
-        <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-5">
-          <div className="bg-black border border-white/10 rounded-xl p-8 w-full max-w-2xl max-h-[90vh] overflow-y-auto relative">
-            <button
-              onClick={() => setShowForm(false)}
-              className="absolute top-4 right-4 text-white/50 hover:text-white"
-              aria-label="닫기"
+      <ModalAnimation isOpen={showForm} onClose={handleClose}>
+        <div className="bg-black border border-white/10 rounded-xl p-8 w-full max-w-2xl max-h-[90vh] overflow-y-auto relative">
+          <button
+            onClick={handleClose}
+            className="absolute top-4 right-4 text-white/50 hover:text-white"
+            aria-label="닫기"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
             >
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M18 6L6 18M6 6L18 18"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </button>
-            <ContactForm />
-          </div>
+              <path
+                d="M18 6L6 18M6 6L18 18"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+          <ContactForm onClose={handleClose} />
         </div>
-      )}
+      </ModalAnimation>
     </section>
   );
 }

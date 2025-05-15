@@ -9,7 +9,20 @@ interface FormData {
   inquiry: string;
 }
 
-export default function ContactForm() {
+interface FormErrors {
+  name?: string;
+  position?: string;
+  phone?: string;
+  company?: string;
+  industry?: string;
+  inquiry?: string;
+}
+
+interface ContactFormProps {
+  onClose?: () => void;
+}
+
+export default function ContactForm({ onClose }: ContactFormProps) {
   const [formData, setFormData] = useState<FormData>({
     name: "",
     position: "",
@@ -19,55 +32,104 @@ export default function ContactForm() {
     inquiry: "",
   });
 
+  const [formErrors, setFormErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<
     "idle" | "success" | "error"
   >("idle");
+
+  const validateForm = (): boolean => {
+    const errors: FormErrors = {};
+
+    // 이름 검증 (1-5글자)
+    if (formData.name.length < 1 || formData.name.length > 5) {
+      errors.name = "이름은 1-5글자 사이로 입력해주세요";
+    }
+
+    // 직책 검증 (최소 1글자)
+    if (formData.position.length < 1) {
+      errors.position = "직책을 입력해주세요";
+    }
+
+    // 회사명 검증 (최소 1글자)
+    if (formData.company.length < 1) {
+      errors.company = "회사명을 입력해주세요";
+    }
+
+    // 산업군 검증 (최소 1글자)
+    if (formData.industry.length < 1) {
+      errors.industry = "산업군을 입력해주세요";
+    }
+
+    // 문의내용 검증 (1-40글자)
+    if (formData.inquiry.length < 1 || formData.inquiry.length > 40) {
+      errors.inquiry = "문의내용은 1-40글자 사이로 입력해주세요";
+    }
+
+    setFormErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    // 입력 시 해당 필드의 에러 메시지 제거
+    setFormErrors((prev) => ({ ...prev, [name]: undefined }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // 폼 유효성 검사
+    if (!validateForm()) {
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
-      const formUrl = "https://docs.google.com/forms/d/e/form_id/formResponse";
+      const formUrl = process.env.NEXT_PUBLIC_GOOGLE_FORM_URL;
+      if (!formUrl) {
+        throw new Error("Google Form URL이 설정되지 않았습니다.");
+      }
 
-      const formBody = new URLSearchParams({
-        "entry.?": formData.name, // 담당자 이름
-        "entry.?": formData.position, // 직책
-        "entry.?": formData.phone, // 연락처
-        "entry.?": formData.company, // 회사명
-        "entry.?": formData.industry, // 산업군
-        "entry.?": formData.inquiry, // 문의내용
-      });
-      // 각각의 input의 entry.id를 찾아서 추가
-
-      // CORS 우회를 위한 임시 iframe 생성 및 제출
+      // iframe 생성
       const iframe = document.createElement("iframe");
-      iframe.style.display = "none";
+      iframe.setAttribute("name", "hidden_iframe");
+      iframe.setAttribute("id", "hidden_iframe");
+      iframe.setAttribute("style", "display: none;");
       document.body.appendChild(iframe);
 
+      // 폼 생성
       const form = document.createElement("form");
-      form.method = "POST";
-      form.action = formUrl;
-      form.target = "hidden_iframe";
+      form.setAttribute("action", formUrl);
+      form.setAttribute("method", "post");
+      form.setAttribute("target", "hidden_iframe");
 
-      // 폼 데이터를 hidden input으로 추가
-      Object.entries(Object.fromEntries(formBody)).forEach(([key, value]) => {
+      // 폼 데이터 추가
+      const entries = [
+        [process.env.NEXT_PUBLIC_ENTRY_NAME, formData.name],
+        [process.env.NEXT_PUBLIC_ENTRY_POSITION, formData.position],
+        [process.env.NEXT_PUBLIC_ENTRY_PHONE, formData.phone],
+        [process.env.NEXT_PUBLIC_ENTRY_COMPANY, formData.company],
+        [process.env.NEXT_PUBLIC_ENTRY_INDUSTRY, formData.industry],
+        [process.env.NEXT_PUBLIC_ENTRY_INQUIRY, formData.inquiry],
+      ] as [string | undefined, string][];
+
+      // 환경 변수가 모두 설정되어 있는지 확인
+      for (const [key, value] of entries) {
+        if (!key) {
+          throw new Error("필수 환경 변수가 설정되지 않았습니다.");
+        }
         const input = document.createElement("input");
-        input.type = "hidden";
-        input.name = key;
-        input.value = value as string;
+        input.setAttribute("type", "hidden");
+        input.setAttribute("name", key);
+        input.setAttribute("value", value);
         form.appendChild(input);
-      });
+      }
 
-      iframe.name = "hidden_iframe";
       document.body.appendChild(form);
       form.submit();
 
@@ -75,7 +137,7 @@ export default function ContactForm() {
       setTimeout(() => {
         document.body.removeChild(form);
         document.body.removeChild(iframe);
-      }, 1000);
+      }, 500);
 
       setSubmitStatus("success");
       setFormData({
@@ -108,7 +170,7 @@ export default function ContactForm() {
             htmlFor="name"
             className="block text-sm font-medium text-gray-200 mb-2"
           >
-            담당자 이름
+            담당자 이름 <span className="text-red-500 text-24">*</span>
           </label>
           <input
             type="text"
@@ -117,15 +179,20 @@ export default function ContactForm() {
             value={formData.name}
             onChange={handleChange}
             required
-            className="w-full px-4 py-2 bg-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-white"
+            className={`w-full px-4 py-2 bg-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-white ${
+              formErrors.name ? "border-red-500" : "border-white/10"
+            }`}
           />
+          {formErrors.name && (
+            <p className="mt-1 text-sm text-red-500">{formErrors.name}</p>
+          )}
         </div>
         <div>
           <label
             htmlFor="position"
             className="block text-sm font-medium text-gray-200 mb-2"
           >
-            직책
+            직책 <span className="text-red-500 text-24">*</span>
           </label>
           <input
             type="text"
@@ -134,8 +201,13 @@ export default function ContactForm() {
             value={formData.position}
             onChange={handleChange}
             required
-            className="w-full px-4 py-2 bg-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-white"
+            className={`w-full px-4 py-2 bg-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-white ${
+              formErrors.position ? "border-red-500" : "border-white/10"
+            }`}
           />
+          {formErrors.position && (
+            <p className="mt-1 text-sm text-red-500">{formErrors.position}</p>
+          )}
         </div>
       </div>
 
@@ -144,7 +216,7 @@ export default function ContactForm() {
           htmlFor="phone"
           className="block text-sm font-medium text-gray-200 mb-2"
         >
-          연락처
+          연락처 <span className="text-red-500 text-24">*</span>
         </label>
         <input
           type="tel"
@@ -153,8 +225,13 @@ export default function ContactForm() {
           value={formData.phone}
           onChange={handleChange}
           required
-          className="w-full px-4 py-2 bg-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-white"
+          className={`w-full px-4 py-2 bg-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-white ${
+            formErrors.phone ? "border-red-500" : "border-white/10"
+          }`}
         />
+        {formErrors.phone && (
+          <p className="mt-1 text-sm text-red-500">{formErrors.phone}</p>
+        )}
       </div>
 
       <div>
@@ -162,7 +239,7 @@ export default function ContactForm() {
           htmlFor="company"
           className="block text-sm font-medium text-gray-200 mb-2"
         >
-          회사명
+          회사명 <span className="text-red-500 text-24">*</span>
         </label>
         <input
           type="text"
@@ -171,8 +248,13 @@ export default function ContactForm() {
           value={formData.company}
           onChange={handleChange}
           required
-          className="w-full px-4 py-2 bg-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-white"
+          className={`w-full px-4 py-2 bg-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-white ${
+            formErrors.company ? "border-red-500" : "border-white/10"
+          }`}
         />
+        {formErrors.company && (
+          <p className="mt-1 text-sm text-red-500">{formErrors.company}</p>
+        )}
       </div>
 
       <div>
@@ -180,7 +262,7 @@ export default function ContactForm() {
           htmlFor="industry"
           className="block text-sm font-medium text-gray-200 mb-2"
         >
-          산업군
+          산업군 <span className="text-red-500 text-24">*</span>
         </label>
         <input
           type="text"
@@ -189,8 +271,13 @@ export default function ContactForm() {
           value={formData.industry}
           onChange={handleChange}
           required
-          className="w-full px-4 py-2 bg-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-white"
+          className={`w-full px-4 py-2 bg-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-white ${
+            formErrors.industry ? "border-red-500" : "border-white/10"
+          }`}
         />
+        {formErrors.industry && (
+          <p className="mt-1 text-sm text-red-500">{formErrors.industry}</p>
+        )}
       </div>
 
       <div>
@@ -198,7 +285,8 @@ export default function ContactForm() {
           htmlFor="inquiry"
           className="block text-sm font-medium text-gray-200 mb-2"
         >
-          문의내용
+          문의내용 <span className="text-red-500 text-24">*</span>
+          <span className="text-gray-400 text-sm ml-2">(40자 내외)</span>
         </label>
         <textarea
           id="inquiry"
@@ -207,11 +295,19 @@ export default function ContactForm() {
           onChange={handleChange}
           required
           rows={4}
-          className="w-full px-4 py-2 bg-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-white resize-none"
+          className={`w-full px-4 py-2 bg-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary text-white resize-none ${
+            formErrors.inquiry ? "border-red-500" : "border-white/10"
+          }`}
         />
+        {formErrors.inquiry && (
+          <p className="mt-1 text-sm text-red-500">{formErrors.inquiry}</p>
+        )}
       </div>
 
-      <div className="flex justify-center">
+      <div className="flex justify-center flex-col items-center space-y-2">
+        <p className="text-gray-400 text-sm mb-2">
+          <span className="text-red-500">*</span> 표시는 필수 입력 항목입니다
+        </p>
         <button
           type="submit"
           disabled={isSubmitting}
@@ -250,10 +346,7 @@ export default function ContactForm() {
               <button
                 onClick={() => {
                   setSubmitStatus("idle");
-                  if (typeof window !== "undefined") {
-                    const event = new Event("closeContactModal");
-                    window.dispatchEvent(event);
-                  }
+                  onClose?.();
                 }}
                 className="px-6 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors"
               >

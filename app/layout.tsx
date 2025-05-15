@@ -23,6 +23,9 @@ export const metadata: Metadata = {
       sizes: "32x32",
     },
   ],
+  other: {
+    "naver-site-verification": "e642e6051c62d02caba3e508305dc2826689e20b",
+  },
 };
 
 export default function RootLayout({
